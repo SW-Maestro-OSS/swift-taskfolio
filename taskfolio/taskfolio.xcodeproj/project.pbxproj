@@ -19,6 +19,7 @@
 		703D55B62A1F4557003BB6D7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B52A1F4557003BB6D7 /* SettingView.swift */; };
 		703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B72A1F455C003BB6D7 /* SettingStore.swift */; };
 		703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */; };
+		703D55BC2A1F57DA003BB6D7 /* TaskClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55BB2A1F57DA003BB6D7 /* TaskClient.swift */; };
 		70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */; };
 		70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F90E2A1E128C00099F17 /* Assets.xcassets */; };
 		70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */; };
@@ -37,6 +38,7 @@
 		703D55B52A1F4557003BB6D7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		703D55B72A1F455C003BB6D7 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
 		703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		703D55BB2A1F57DA003BB6D7 /* TaskClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskClient.swift; sourceTree = "<group>"; };
 		70D2F9072A1E128B00099F17 /* taskfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskfolioApp.swift; sourceTree = "<group>"; };
 		70D2F90E2A1E128C00099F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		703D559F2A1F15D8003BB6D7 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				703D55BB2A1F57DA003BB6D7 /* TaskClient.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -181,8 +184,8 @@
 				703D55B32A1F43A3003BB6D7 /* taskfolio.entitlements */,
 				703D55942A1F14E2003BB6D7 /* App */,
 				703D55952A1F14E8003BB6D7 /* Feature */,
-				703D55972A1F14F0003BB6D7 /* Core */,
 				703D55962A1F14EC003BB6D7 /* Domain */,
+				703D55972A1F14F0003BB6D7 /* Core */,
 				703D55982A1F14F4003BB6D7 /* Shared */,
 				70D2F90E2A1E128C00099F17 /* Assets.xcassets */,
 				70D2F9182A1E128C00099F17 /* Info.plist */,
@@ -287,6 +290,7 @@
 				70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */,
 				703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */,
 				703D559B2A1F15C7003BB6D7 /* RootView.swift in Sources */,
+				703D55BC2A1F57DA003BB6D7 /* TaskClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
