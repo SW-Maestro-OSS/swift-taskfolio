@@ -20,6 +20,9 @@
 		703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B72A1F455C003BB6D7 /* SettingStore.swift */; };
 		703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */; };
 		703D55BC2A1F57DA003BB6D7 /* TaskClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55BB2A1F57DA003BB6D7 /* TaskClient.swift */; };
+		703D55C02A1F59C0003BB6D7 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55BF2A1F59C0003BB6D7 /* Color+Extension.swift */; };
+		703D55C22A1F59D6003BB6D7 /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55C12A1F59D6003BB6D7 /* ColorType.swift */; };
+		703D55C42A1F5AC8003BB6D7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55C32A1F5AC8003BB6D7 /* Array+Extension.swift */; };
 		70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */; };
 		70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F90E2A1E128C00099F17 /* Assets.xcassets */; };
 		70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */; };
@@ -39,6 +42,9 @@
 		703D55B72A1F455C003BB6D7 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
 		703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		703D55BB2A1F57DA003BB6D7 /* TaskClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskClient.swift; sourceTree = "<group>"; };
+		703D55BF2A1F59C0003BB6D7 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		703D55C12A1F59D6003BB6D7 /* ColorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorType.swift; sourceTree = "<group>"; };
+		703D55C32A1F5AC8003BB6D7 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		70D2F9072A1E128B00099F17 /* taskfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskfolioApp.swift; sourceTree = "<group>"; };
 		70D2F90E2A1E128C00099F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */,
+				703D55C32A1F5AC8003BB6D7 /* Array+Extension.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -115,6 +122,8 @@
 		703D559E2A1F15D0003BB6D7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				703D55BF2A1F59C0003BB6D7 /* Color+Extension.swift */,
+				703D55C12A1F59D6003BB6D7 /* ColorType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,10 +288,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				703D559D2A1F15CC003BB6D7 /* RootStore.swift in Sources */,
+				703D55C22A1F59D6003BB6D7 /* ColorType.swift in Sources */,
+				703D55C02A1F59C0003BB6D7 /* Color+Extension.swift in Sources */,
 				703D55B62A1F4557003BB6D7 /* SettingView.swift in Sources */,
 				703D55AC2A1F4093003BB6D7 /* TaskListCellStore.swift in Sources */,
 				703D55AA2A1F408D003BB6D7 /* TaskListCellView.swift in Sources */,
 				703D55B22A1F438A003BB6D7 /* TaskCloudManager.swift in Sources */,
+				703D55C42A1F5AC8003BB6D7 /* Array+Extension.swift in Sources */,
 				703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */,
 				703D55A52A1F16BC003BB6D7 /* HomeStore.swift in Sources */,
 				703D55A72A1F3F82003BB6D7 /* HomeView.swift in Sources */,
