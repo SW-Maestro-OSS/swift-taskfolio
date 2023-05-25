@@ -12,7 +12,7 @@ import ComposableArchitecture
 struct TaskListCellStore: ReducerProtocol {
     struct State: Equatable, Identifiable {
         let id: UUID
-        let plot: Plot
+        let task: Task
     }
     
     enum Action: Equatable {

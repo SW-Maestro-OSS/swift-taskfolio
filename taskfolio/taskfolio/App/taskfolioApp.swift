@@ -9,12 +9,9 @@ import SwiftUI
 
 @main
 struct taskfolioApp: App {
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            RootView(store: .init(initialState: .init(), reducer: RootStore()._printChanges()))
         }
     }
 }
