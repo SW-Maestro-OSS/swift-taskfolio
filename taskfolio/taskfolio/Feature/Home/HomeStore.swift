@@ -11,7 +11,6 @@ import ComposableArchitecture
 
 enum HomeScene: Hashable {
     case home
-    case editPlot
     case setting
 }
 

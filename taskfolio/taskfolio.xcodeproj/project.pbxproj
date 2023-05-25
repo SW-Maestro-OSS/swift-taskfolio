@@ -16,6 +16,9 @@
 		703D55AC2A1F4093003BB6D7 /* TaskListCellStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55AB2A1F4093003BB6D7 /* TaskListCellStore.swift */; };
 		703D55AF2A1F42B4003BB6D7 /* taskfolio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 703D55AD2A1F42B4003BB6D7 /* taskfolio.xcdatamodeld */; };
 		703D55B22A1F438A003BB6D7 /* TaskCloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B12A1F438A003BB6D7 /* TaskCloudManager.swift */; };
+		703D55B62A1F4557003BB6D7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B52A1F4557003BB6D7 /* SettingView.swift */; };
+		703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B72A1F455C003BB6D7 /* SettingStore.swift */; };
+		703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */; };
 		70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */; };
 		70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F90E2A1E128C00099F17 /* Assets.xcassets */; };
 		70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */; };
@@ -31,6 +34,9 @@
 		703D55AE2A1F42B4003BB6D7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		703D55B12A1F438A003BB6D7 /* TaskCloudManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCloudManager.swift; sourceTree = "<group>"; };
 		703D55B32A1F43A3003BB6D7 /* taskfolio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = taskfolio.entitlements; sourceTree = "<group>"; };
+		703D55B52A1F4557003BB6D7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		703D55B72A1F455C003BB6D7 /* SettingStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStore.swift; sourceTree = "<group>"; };
+		703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		70D2F9072A1E128B00099F17 /* taskfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskfolioApp.swift; sourceTree = "<group>"; };
 		70D2F90E2A1E128C00099F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +67,7 @@
 		703D55952A1F14E8003BB6D7 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				703D55B42A1F4551003BB6D7 /* Setting */,
 				703D55A82A1F4065003BB6D7 /* TaskList */,
 				703D55A32A1F1681003BB6D7 /* Home */,
 				703D55992A1F15C1003BB6D7 /* Root */,
@@ -89,6 +96,7 @@
 		703D55982A1F14F4003BB6D7 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				703D55B92A1F53FE003BB6D7 /* Date+Extension.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -140,6 +148,15 @@
 				703D55AD2A1F42B4003BB6D7 /* taskfolio.xcdatamodeld */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		703D55B42A1F4551003BB6D7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				703D55B52A1F4557003BB6D7 /* SettingView.swift */,
+				703D55B72A1F455C003BB6D7 /* SettingStore.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		70D2F8FE2A1E128B00099F17 = {
@@ -259,13 +276,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				703D559D2A1F15CC003BB6D7 /* RootStore.swift in Sources */,
+				703D55B62A1F4557003BB6D7 /* SettingView.swift in Sources */,
 				703D55AC2A1F4093003BB6D7 /* TaskListCellStore.swift in Sources */,
 				703D55AA2A1F408D003BB6D7 /* TaskListCellView.swift in Sources */,
 				703D55B22A1F438A003BB6D7 /* TaskCloudManager.swift in Sources */,
+				703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */,
 				703D55A52A1F16BC003BB6D7 /* HomeStore.swift in Sources */,
 				703D55A72A1F3F82003BB6D7 /* HomeView.swift in Sources */,
 				703D55AF2A1F42B4003BB6D7 /* taskfolio.xcdatamodeld in Sources */,
 				70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */,
+				703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */,
 				703D559B2A1F15C7003BB6D7 /* RootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

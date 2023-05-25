@@ -12,8 +12,6 @@ import ComposableArchitecture
 struct HomeView: View {
     public let store: StoreOf<HomeStore>
     
-    @Environment(\.isSearching) private var isSearching
-    
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationStack(path: viewStore.binding(\.$path)) {
