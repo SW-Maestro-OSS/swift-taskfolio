@@ -49,6 +49,7 @@ struct TaskCellStore: ReducerProtocol {
             
         case .toggleTimerButtonTapped:
             state.isTimerActive.toggle()
+            return .none
             return .run { [isTimerActive = state.isTimerActive] send in
                 guard isTimerActive else { return }
                 for await _ in self.clock.timer(interval: .seconds(1)) {

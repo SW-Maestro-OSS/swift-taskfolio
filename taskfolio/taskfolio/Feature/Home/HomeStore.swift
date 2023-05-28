@@ -23,6 +23,9 @@ struct HomeStore: ReducerProtocol {
         
         var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
         var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
+        
+        var timerTaskCellID: UUID?
+        var isTimerActive: Bool = false
     }
     
     enum Action: BindableAction, Equatable {
@@ -32,17 +35,24 @@ struct HomeStore: ReducerProtocol {
         case leftButtonTapped
         case rightButtonTapped
         case dateChanged(Date)
+        case timerTicked
         
         case refresh
-        case fetchResponse([Task])
-        case filterTaskListCellsRquest
-        case filterTaskListCellsResponse(IdentifiedArrayOf<TaskCellStore.State>)
+        case fetchTasksRequest
+        case fetchTasksResponse([Task])
+        case fetchFilteredTaskListCellsRequest(IdentifiedArrayOf<TaskCellStore.State>, Date)
+        case fetchFilteredTaskListCellsResponse(IdentifiedArrayOf<TaskCellStore.State>)
+        
+        case updateTaskListCells(IdentifiedArrayOf<TaskCellStore.State>)
+        case updateFilteredTaskListCells(IdentifiedArrayOf<TaskCellStore.State>)
         
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
     }
     
     @Dependency(\.taskClient) var taskClient
-    private enum TaskTimerStopID {}
+    @Dependency(\.continuousClock) var clock
+    
+    private enum TimerID {}
     
     var body: some ReducerProtocol<State, Action> {
         BindingReducer()
@@ -71,45 +81,73 @@ struct HomeStore: ReducerProtocol {
             case let .dateChanged(date):
                 state.currentDate = date
                 state.currentWeekDates = date.weekDates()
-                return .send(.filterTaskListCellsRquest)
+                return .send(.fetchFilteredTaskListCellsRequest(state.taskListCells, state.currentDate))
+                
+            case .timerTicked:
+                return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
+                    if $0.id == state.timerTaskCellID {
+                        var task = $0.task
+                        task.time += 1
+                        taskClient.save()
+                        return .init(id: $0.id, task: task, isTimerActive: $0.isTimerActive)
+                    } else {
+                        return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
+                    }
+                }))))
                 
             case .refresh:
-                return .send(.fetchResponse(taskClient.fetch()))
+                return .concatenate([
+                    .send(.fetchTasksRequest),
+                    .cancel(id: TimerID.self)
+                ])
                 
-            case let .fetchResponse(tasks):
-                state.taskListCells = []
-                tasks.forEach({ task in
-                    state.taskListCells.append(.init(id: UUID(), task: task))
-                })
-                return .send(.filterTaskListCellsRquest)
+            case .fetchTasksRequest:
+                return .send(.fetchTasksResponse(taskClient.fetch()))
                 
-            case .filterTaskListCellsRquest:
-                let originCells = state.taskListCells
-                let filterDate = state.currentDate
+            case let .fetchTasksResponse(tasks):
+                return .send(.updateTaskListCells(.init(
+                    uniqueElements: tasks.map({
+                        return .init(id: .init(), task: $0)
+                    })
+                )))
                 
-                return .send(.filterTaskListCellsResponse(
-                    originCells.filter({
-                        $0.task.date?.isDate(inSameDayAs: filterDate) == true
-                    })))
+            case let .fetchFilteredTaskListCellsRequest(taskListCells, date):
+                return .send(.fetchFilteredTaskListCellsResponse(taskListCells.filter({ $0.task.date?.isDate(inSameDayAs: date) == true })))
                 
-            case let .filterTaskListCellsResponse(filterTaskListCells):
-                state.filteredTaskListCells = filterTaskListCells
+            case let .fetchFilteredTaskListCellsResponse(filteredTaskListCells):
+                return .send(.updateFilteredTaskListCells(filteredTaskListCells))
+                
+            case let .updateTaskListCells(taskListCells):
+                state.taskListCells = taskListCells
+                return .send(.fetchFilteredTaskListCellsRequest(taskListCells, state.currentDate))
+                
+            case let .updateFilteredTaskListCells(filteredTaskListCells):
+                state.filteredTaskListCells = filteredTaskListCells
                 return .none
                 
             case let .taskListCell(id, action):
                 switch action {
                 case .toggleTimerButtonTapped:
-                    var newFilteredTaskListCell: IdentifiedArrayOf<TaskCellStore.State> = []
-                    state.filteredTaskListCells.forEach({ state in
-                        let isTimerActive = (id == state.id)
-                        newFilteredTaskListCell.append(.init(id: state.id, task: state.task, isTimerActive: isTimerActive))
-                    })
-                    return .send(.filterTaskListCellsResponse(newFilteredTaskListCell))
-                        .cancellable(id: TaskTimerStopID.self, cancelInFlight: true)
+                    state.timerTaskCellID = nil
+                    state.isTimerActive = false
+                    return .concatenate([
+                        .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
+                            let isTimerActive = $0.isTimerActive ? false : (id == $0.id)
+                            state.timerTaskCellID = isTimerActive ? id : state.timerTaskCellID
+                            state.isTimerActive = isTimerActive ? true : state.isTimerActive
+                            return .init(id: $0.id, task: $0.task, isTimerActive: isTimerActive)
+                        })))),
+                        .run { [isTimerActive = state.isTimerActive] send in
+                            guard isTimerActive else { return }
+                            for await _ in self.clock.timer(interval: .seconds(1)) {
+                                await send(.timerTicked)
+                            }
+                        }
+                            .cancellable(id: TimerID.self, cancelInFlight: true)
+                    ])
                     
                 default:
                     return .none
-                        .cancellable(id: TaskTimerStopID.self, cancelInFlight: true)
                 }
             }
         }
