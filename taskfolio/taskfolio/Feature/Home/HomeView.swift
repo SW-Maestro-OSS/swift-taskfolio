@@ -83,6 +83,18 @@ struct HomeView: View {
                     }
                 }
                 .navigationTitle("Taskfolio")
+                .navigationBarItems(
+                    trailing: HStack(spacing: 10) {
+                        EditButton()
+                        
+                        Button(action:{
+                            
+                        }) {
+                            Image(systemName: "gearshape")
+                                .imageScale(.medium)
+                        }
+                    }
+                )
                 .navigationDestination(for: HomeScene.self) { scene in
                     switch scene {
                     default:

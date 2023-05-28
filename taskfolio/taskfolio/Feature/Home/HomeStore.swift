@@ -23,6 +23,7 @@ struct HomeStore: ReducerProtocol {
             .init(id: .init(), task: nil),
             .init(id: .init(), task: nil)
         ]
+        var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
     }
     
     enum Action: BindableAction, Equatable {

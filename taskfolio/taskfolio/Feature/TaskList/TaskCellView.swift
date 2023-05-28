@@ -20,7 +20,7 @@ struct TaskCellView: View {
                         .frame(width: 3, height: 15)
                         .overlay(.red)
                     
-                    Text("title1")
+                    Text("untitled")
                     
                     Spacer()
                     
