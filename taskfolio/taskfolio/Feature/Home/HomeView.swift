@@ -15,8 +15,55 @@ struct HomeView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationStack(path: viewStore.binding(\.$path)) {
-                ScrollView {
+                VStack(spacing: .zero) {
                     VStack(spacing: 5) {
+                        HStack {
+                            Spacer()
+                            
+                            Button(action: {
+                                
+                            }, label: {
+                                Image(systemName: "chevron.backward")
+                                    .fontWeight(.semibold)
+                            })
+                            
+                            Button(action: {
+                                
+                            }, label: {
+                                Image(systemName: "chevron.forward")
+                                    .fontWeight(.semibold)
+                            })
+                        }
+                        .padding(.horizontal)
+                        .padding(.horizontal)
+                        
+                        HStack {
+                            ForEach(Calendar.current.shortWeekdaySymbols, id: \.self) { symbol in
+                                VStack {
+                                    HStack {
+                                        Spacer()
+                                        
+                                        Text(symbol)
+                                            .font(.subheadline)
+                                        
+                                        Spacer()
+                                    }
+                                    
+                                    HStack {
+                                        Spacer()
+                                        
+                                        Text("12")
+                                            .font(.caption)
+                                        
+                                        Spacer()
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    List {
                         ForEachStore(self.store.scope(state: \.taskListCells, action: HomeStore.Action.taskListCell(id:action:))) {
                             TaskCellView(store: $0)
                         }
@@ -38,7 +85,6 @@ struct HomeView: View {
                 .navigationTitle("Taskfolio")
                 .navigationDestination(for: HomeScene.self) { scene in
                     switch scene {
-                        
                     default:
                         EmptyView()
                     }

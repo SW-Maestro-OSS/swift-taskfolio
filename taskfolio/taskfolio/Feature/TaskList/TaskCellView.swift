@@ -39,13 +39,6 @@ struct TaskCellView: View {
                         .font(.caption)
                 }
             }
-            .padding()
-            .background(Color(.systemGray6))
-            .cornerRadius(12)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                viewStore.send(.tapped)
-            }
         }
     }
 }
