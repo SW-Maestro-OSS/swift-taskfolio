@@ -36,6 +36,8 @@ struct HomeStore: ReducerProtocol {
         case leftButtonTapped
         case rightButtonTapped
         case dateChanged(Date)
+        case delete(IndexSet)
+        
         case timerTicked
         
         case refresh
@@ -84,13 +86,19 @@ struct HomeStore: ReducerProtocol {
                 state.currentWeekDates = date.weekDates()
                 return .send(.fetchFilteredTaskListCellsRequest(state.taskListCells, state.currentDate))
                 
+            case let .delete(indexSet):
+                for index in indexSet {
+                    let id = state.taskListCells[index].task.objectID
+                    taskClient.delete(id)
+                }
+                return .send(.refresh)
+                
             case .timerTicked:
                 return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
                     if $0.id == state.timerTaskCellID {
-                        var task = $0.task
-                        task.time += 1
+                        $0.task.time += 1
                         taskClient.save()
-                        return .init(id: $0.id, task: task, isTimerActive: $0.isTimerActive)
+                        return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
                     } else {
                         return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
                     }
@@ -148,8 +156,14 @@ struct HomeStore: ReducerProtocol {
                             .cancellable(id: TimerID.self, cancelInFlight: true)
                     ])
                     
-                default:
-                    return .none
+                case let .textFieldChanged(title):
+                    return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
+                        if $0.id == id {
+                            $0.task.title = title
+                            taskClient.save()
+                        }
+                        return .init(id: UUID(), task: $0.task, isTimerActive: $0.isTimerActive)
+                    }))))
                 }
             }
         }

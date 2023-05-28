@@ -20,7 +20,10 @@ struct TaskCellView: View {
                         .frame(width: 3, height: 15)
                         .overlay(.red)
                     
-                    Text(viewStore.task.title ?? "untitled")
+                    TextField(
+                      "Untitled Task",
+                      text: viewStore.binding(get: \.title, send: TaskCellStore.Action.textFieldChanged)
+                    )
                     
                     Spacer()
                     

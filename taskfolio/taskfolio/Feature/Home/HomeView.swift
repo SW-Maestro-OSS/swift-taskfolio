@@ -81,6 +81,7 @@ struct HomeView: View {
                         ForEachStore(self.store.scope(state: \.filteredTaskListCells, action: HomeStore.Action.taskListCell(id:action:))) {
                             TaskCellView(store: $0)
                         }
+                        .onDelete { viewStore.send(.delete($0)) }
                     }
                     .refreshable {
                         viewStore.send(.refresh)
