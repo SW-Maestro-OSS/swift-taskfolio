@@ -1,18 +1,18 @@
 //
-//  TaskListCellView.swift
+//  TaskListCellStore.swift
 //  taskfolio
 //
 //  Created by 송영모 on 2023/05/25.
 //
 
-import Foundation
+import SwiftUI
 
 import ComposableArchitecture
 
-struct TaskListCellStore: ReducerProtocol {
+struct TaskCellStore: ReducerProtocol {
     struct State: Equatable, Identifiable {
         let id: UUID
-        let task: Task
+        let task: Task?
     }
     
     enum Action: Equatable {

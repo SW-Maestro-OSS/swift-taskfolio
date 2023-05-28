@@ -15,7 +15,13 @@ struct HomeView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationStack(path: viewStore.binding(\.$path)) {
-                VStack(spacing: .zero) {
+                ScrollView {
+                    VStack(spacing: 5) {
+                        ForEachStore(self.store.scope(state: \.taskListCells, action: HomeStore.Action.taskListCell(id:action:))) {
+                            TaskCellView(store: $0)
+                        }
+                    }
+                    
                     Spacer()
                     
                     HStack {
