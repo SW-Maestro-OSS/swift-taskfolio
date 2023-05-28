@@ -88,6 +88,9 @@ struct HomeView: View {
                         .padding(.horizontal)
                     }
                 }
+                .task {
+                    viewStore.send(.refresh)
+                }
                 .navigationTitle("Taskfolio")
                 .navigationBarItems(
                     trailing: HStack(spacing: 10) {

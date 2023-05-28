@@ -59,7 +59,7 @@ extension TaskCloudManager {
     func fetch() -> [Task] {
         let viewContext = self.persistentContainer.viewContext
         
-        let request: NSFetchRequest<NSFetchRequestResult> = .init(entityName: "Plot")
+        let request: NSFetchRequest<NSFetchRequestResult> = .init(entityName: "Task")
         
         do {
             return try viewContext.fetch(request) as! [Task]
