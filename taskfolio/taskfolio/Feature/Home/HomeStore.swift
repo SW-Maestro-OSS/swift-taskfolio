@@ -35,7 +35,8 @@ struct HomeStore: ReducerProtocol {
         
         case refresh
         case fetchResponse([Task])
-        case filterTaskListCells
+        case filterTaskListCellsRquest
+        case filterTaskListCellsResponse(IdentifiedArrayOf<TaskCellStore.State>)
         
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
     }
@@ -70,7 +71,7 @@ struct HomeStore: ReducerProtocol {
             case let .dateChanged(date):
                 state.currentDate = date
                 state.currentWeekDates = date.weekDates()
-                return .send(.filterTaskListCells)
+                return .send(.filterTaskListCellsRquest)
                 
             case .refresh:
                 return .send(.fetchResponse(taskClient.fetch()))
@@ -78,24 +79,39 @@ struct HomeStore: ReducerProtocol {
             case let .fetchResponse(tasks):
                 state.taskListCells = []
                 tasks.forEach({ task in
-                    state.taskListCells.append(.init(id: .init(), task: task))
+                    state.taskListCells.append(.init(id: UUID(), task: task))
                 })
-                return .send(.filterTaskListCells)
+                return .send(.filterTaskListCellsRquest)
                 
-            case .filterTaskListCells:
+            case .filterTaskListCellsRquest:
                 let originCells = state.taskListCells
                 let filterDate = state.currentDate
                 
-                state.filteredTaskListCells = originCells.filter({
-                    $0.task.date?.isDate(inSameDayAs: filterDate) == true
-                })
+                return .send(.filterTaskListCellsResponse(
+                    originCells.filter({
+                        $0.task.date?.isDate(inSameDayAs: filterDate) == true
+                    })))
+                
+            case let .filterTaskListCellsResponse(filterTaskListCells):
+                state.filteredTaskListCells = filterTaskListCells
                 return .none
                 
             case let .taskListCell(id, action):
-                return .none
+                switch action {
+                case .toggleTimerButtonTapped:
+                    var newFilteredTaskListCell: IdentifiedArrayOf<TaskCellStore.State> = []
+                    state.filteredTaskListCells.forEach({ state in
+                        var isTimerActive = (id == state.id)
+                        newFilteredTaskListCell.append(.init(id: state.id, task: state.task, isTimerActive: isTimerActive))
+                    })
+                    return .send(.filterTaskListCellsResponse(newFilteredTaskListCell))
+                    
+                default:
+                    return .none
+                }
             }
         }
-        .forEach(\.taskListCells, action: /Action.taskListCell(id:action:)) {
+        .forEach(\.filteredTaskListCells, action: /Action.taskListCell(id:action:)) {
             TaskCellStore()
         }
     }

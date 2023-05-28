@@ -15,12 +15,13 @@ struct TaskCellStore: ReducerProtocol {
         let task: Task
         
         var time: Int
-        var isTimerActive = false
+        var isTimerActive: Bool = false
         
-        init(id: UUID, task: Task) {
+        init(id: UUID, task: Task, isTimerActive: Bool = false) {
             self.id = id
             self.task = task
             self.time = Int(task.time)
+            self.isTimerActive = isTimerActive
         }
     }
     
