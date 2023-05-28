@@ -42,7 +42,7 @@ struct HomeStore: ReducerProtocol {
     }
     
     @Dependency(\.taskClient) var taskClient
-    private enum TodoCompletionID {}
+    private enum TaskTimerStopID {}
     
     var body: some ReducerProtocol<State, Action> {
         BindingReducer()
@@ -101,10 +101,11 @@ struct HomeStore: ReducerProtocol {
                 case .toggleTimerButtonTapped:
                     var newFilteredTaskListCell: IdentifiedArrayOf<TaskCellStore.State> = []
                     state.filteredTaskListCells.forEach({ state in
-                        var isTimerActive = (id == state.id)
+                        let isTimerActive = (id == state.id)
                         newFilteredTaskListCell.append(.init(id: state.id, task: state.task, isTimerActive: isTimerActive))
                     })
                     return .send(.filterTaskListCellsResponse(newFilteredTaskListCell))
+                        .cancellable(id: TaskTimerStopID.self, cancelInFlight: true)
                     
                 default:
                     return .none
