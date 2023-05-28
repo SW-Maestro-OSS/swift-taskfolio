@@ -26,6 +26,7 @@ struct HomeStore: ReducerProtocol {
         
         var timerTaskCellID: UUID?
         var isTimerActive: Bool = false
+        var timeSum: Int = 0
     }
     
     enum Action: BindableAction, Equatable {
@@ -122,6 +123,7 @@ struct HomeStore: ReducerProtocol {
                 return .send(.fetchFilteredTaskListCellsRequest(taskListCells, state.currentDate))
                 
             case let .updateFilteredTaskListCells(filteredTaskListCells):
+                state.timeSum = filteredTaskListCells.map({ Int($0.task.time) }).reduce(0, +)
                 state.filteredTaskListCells = filteredTaskListCells
                 return .none
                 

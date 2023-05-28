@@ -66,7 +66,15 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding([.horizontal, .bottom])
+                        .padding(.horizontal)
+                        
+                        HStack {
+                            Spacer()
+
+                            Text(TimeManager.shared.toString(second: viewStore.timeSum))
+                        }
+                        .padding(.horizontal)
+                        .padding(.horizontal)
                     }
                     
                     List {
