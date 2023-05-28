@@ -48,6 +48,10 @@ extension Date {
         return Calendar.current.component(.weekOfMonth, from: self)
     }
     
+    public var shortWeekdaySymbol: String {
+        return Calendar.current.shortWeekdaySymbols[self.weekday - 1]
+    }
+    
     public func day(to date: Date) -> Int {
         let startDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: self)!
         let endDate = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: date)!

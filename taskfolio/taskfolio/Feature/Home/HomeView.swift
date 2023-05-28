@@ -38,12 +38,12 @@ struct HomeView: View {
                         .padding(.horizontal)
                         
                         HStack {
-                            ForEach(Calendar.current.shortWeekdaySymbols, id: \.self) { symbol in
+                            ForEach(viewStore.currentWeekDates, id: \.self) { date in
                                 VStack {
                                     HStack {
                                         Spacer()
                                         
-                                        Text(symbol)
+                                        Text(date.shortWeekdaySymbol)
                                             .font(.subheadline)
                                         
                                         Spacer()
@@ -52,7 +52,7 @@ struct HomeView: View {
                                     HStack {
                                         Spacer()
                                         
-                                        Text("12")
+                                        Text("\(date.day)")
                                             .font(.caption)
                                         
                                         Spacer()
@@ -60,7 +60,7 @@ struct HomeView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal)
+                        .padding([.horizontal, .bottom])
                     }
                     
                     List {
@@ -88,7 +88,6 @@ struct HomeView: View {
                         EditButton()
                         
                         Button(action:{
-                            
                         }) {
                             Image(systemName: "gearshape")
                                 .imageScale(.medium)

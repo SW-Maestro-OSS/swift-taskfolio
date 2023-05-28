@@ -18,6 +18,9 @@ struct HomeStore: ReducerProtocol {
     struct State: Equatable {
         @BindingState var path: [HomeScene] = []
         
+        var currentWeekDates: [Date] = Date().weekDates()
+        var currentDate: Date = Date()
+        
         var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = [
             .init(id: .init(), task: nil),
             .init(id: .init(), task: nil),
