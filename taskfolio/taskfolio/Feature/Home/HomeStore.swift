@@ -28,11 +28,12 @@ struct HomeStore: ReducerProtocol {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         
-        case refresh
+        case addButtonTapped
         case leftButtonTapped
         case rightButtonTapped
         case dateChanged(Date)
         
+        case refresh
         case fetchResponse([Task])
         case filterTaskListCells
         
@@ -47,6 +48,27 @@ struct HomeStore: ReducerProtocol {
         Reduce<State, Action> { state, action in
             switch action {
             case .binding:
+                return .none
+                
+            case .addButtonTapped:
+                let newTask = taskClient.newTask()
+                newTask.title = "untitled"
+                newTask.date = state.currentDate
+                newTask.colorType = Int16(ColorType.blue.rawValue)
+                newTask.time = 0
+                newTask.order = Int16(state.filteredTaskListCells.count)
+                taskClient.save()
+                return .send(.refresh)
+                
+            case .leftButtonTapped:
+                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: -7)))
+                
+            case .rightButtonTapped:
+                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: 7)))
+                
+            case let .dateChanged(date):
+                state.currentDate = date
+                state.currentWeekDates = date.weekDates()
                 return .none
                 
             case .refresh:
@@ -66,17 +88,6 @@ struct HomeStore: ReducerProtocol {
                 state.filteredTaskListCells = originCells.filter({
                     $0.task.date?.isDate(inSameDayAs: filterDate) == true
                 })
-                return .none
-                
-            case .leftButtonTapped:
-                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: -7)))
-                
-            case .rightButtonTapped:
-                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: 7)))
-                
-            case let .dateChanged(date):
-                state.currentDate = date
-                state.currentWeekDates = date.weekDates()
                 return .none
                 
             case let .taskListCell(id, action):

@@ -20,22 +20,23 @@ struct TaskCellView: View {
                         .frame(width: 3, height: 15)
                         .overlay(.red)
                     
-                    Text("untitled")
+                    Text(viewStore.task.title ?? "untitled")
                     
                     Spacer()
                     
                     Button(action: {
-                        
+                        viewStore.send(.toggleTimerButtonTapped)
                     }, label: {
-                        Image(systemName: "play.circle")
+                        Image(systemName: viewStore.isTimerActive ? "pause.circle" : "play.circle")
                             .imageScale(.large)
+                            .foregroundColor(Color(.label))
                     })
                 }
                 
                 HStack {
                     Spacer()
                     
-                    Text("1:40:57")
+                    Text(TimeManager.shared.toString(second: Int(viewStore.task.time)))
                         .font(.caption)
                 }
             }

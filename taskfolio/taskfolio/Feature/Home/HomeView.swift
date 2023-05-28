@@ -74,6 +74,9 @@ struct HomeView: View {
                             TaskCellView(store: $0)
                         }
                     }
+                    .refreshable {
+                        viewStore.send(.refresh)
+                    }
                     
                     Spacer()
                     
@@ -81,9 +84,11 @@ struct HomeView: View {
                         Spacer()
                         
                         Button(action:{
+                            viewStore.send(.addButtonTapped)
                         }) {
                             Image(systemName: "square.and.pencil")
                                 .imageScale(.large)
+                                .foregroundColor(Color(.label))
                         }
                         .padding(.horizontal)
                     }

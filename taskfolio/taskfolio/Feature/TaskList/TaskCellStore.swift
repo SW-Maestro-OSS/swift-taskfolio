@@ -13,16 +13,43 @@ struct TaskCellStore: ReducerProtocol {
     struct State: Equatable, Identifiable {
         let id: UUID
         let task: Task
+        
+        var time: Int
+        var isTimerActive = false
+        
+        init(id: UUID, task: Task) {
+            self.id = id
+            self.task = task
+            self.time = Int(task.time)
+        }
     }
     
     enum Action: Equatable {
-        case tapped
+        case timerTicked
+        case toggleTimerButtonTapped
     }
+    
+    @Dependency(\.taskClient) var taskClient
+    @Dependency(\.continuousClock) var clock
+    private enum TimerID {}
     
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
-        case .tapped:
+        case .timerTicked:
+            state.task.time += 1
+            state.time += 1
+            taskClient.save()
             return .none
+            
+        case .toggleTimerButtonTapped:
+            state.isTimerActive.toggle()
+            return .run { [isTimerActive = state.isTimerActive] send in
+                guard isTimerActive else { return }
+                for await _ in self.clock.timer(interval: .seconds(1)) {
+                    await send(.timerTicked)
+                }
+            }
+            .cancellable(id: TimerID.self, cancelInFlight: true)
         }
     }
 }
