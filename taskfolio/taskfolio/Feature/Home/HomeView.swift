@@ -21,17 +21,19 @@ struct HomeView: View {
                             Spacer()
                             
                             Button(action: {
-                                
+                                viewStore.send(.leftButtonTapped)
                             }, label: {
                                 Image(systemName: "chevron.backward")
                                     .fontWeight(.semibold)
+                                    .foregroundColor(Color(.label))
                             })
                             
                             Button(action: {
-                                
+                                viewStore.send(.rightButtonTapped)
                             }, label: {
                                 Image(systemName: "chevron.forward")
                                     .fontWeight(.semibold)
+                                    .foregroundColor(Color(.label))
                             })
                         }
                         .padding(.horizontal)
@@ -54,9 +56,13 @@ struct HomeView: View {
                                         
                                         Text("\(date.day)")
                                             .font(.caption)
+                                            .fontWeight(viewStore.currentDate.isDate(inSameDayAs: date) ? .bold : .light)
                                         
                                         Spacer()
                                     }
+                                }
+                                .onTapGesture {
+                                    viewStore.send(.dateChanged(date))
                                 }
                             }
                         }

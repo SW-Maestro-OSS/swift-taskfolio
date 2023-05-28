@@ -32,6 +32,10 @@ struct HomeStore: ReducerProtocol {
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         
+        case leftButtonTapped
+        case rightButtonTapped
+        case dateChanged(Date)
+        
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
     }
     
@@ -41,6 +45,17 @@ struct HomeStore: ReducerProtocol {
         Reduce<State, Action> { state, action in
             switch action {
             case .binding:
+                return .none
+                
+            case .leftButtonTapped:
+                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: -7)))
+                
+            case .rightButtonTapped:
+                return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: 7)))
+                
+            case let .dateChanged(date):
+                state.currentDate = date
+                state.currentWeekDates = date.weekDates()
                 return .none
                 
             case let .taskListCell(id, action):
