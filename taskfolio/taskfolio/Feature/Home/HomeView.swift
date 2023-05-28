@@ -70,7 +70,7 @@ struct HomeView: View {
                     }
                     
                     List {
-                        ForEachStore(self.store.scope(state: \.taskListCells, action: HomeStore.Action.taskListCell(id:action:))) {
+                        ForEachStore(self.store.scope(state: \.filteredTaskListCells, action: HomeStore.Action.taskListCell(id:action:))) {
                             TaskCellView(store: $0)
                         }
                     }

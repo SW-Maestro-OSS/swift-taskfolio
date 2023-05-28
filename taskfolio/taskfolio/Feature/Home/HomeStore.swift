@@ -41,6 +41,7 @@ struct HomeStore: ReducerProtocol {
     }
     
     @Dependency(\.taskClient) var taskClient
+    private enum TodoCompletionID {}
     
     var body: some ReducerProtocol<State, Action> {
         BindingReducer()
@@ -69,7 +70,7 @@ struct HomeStore: ReducerProtocol {
             case let .dateChanged(date):
                 state.currentDate = date
                 state.currentWeekDates = date.weekDates()
-                return .none
+                return .send(.filterTaskListCells)
                 
             case .refresh:
                 return .send(.fetchResponse(taskClient.fetch()))
