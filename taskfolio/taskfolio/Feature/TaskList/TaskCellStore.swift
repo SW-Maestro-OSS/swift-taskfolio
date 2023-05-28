@@ -26,6 +26,7 @@ struct TaskCellStore: ReducerProtocol {
     }
     
     enum Action: Equatable {
+//        case onDisappear
         case timerTicked
         case toggleTimerButtonTapped
     }
@@ -36,6 +37,10 @@ struct TaskCellStore: ReducerProtocol {
     
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
+//        case .onDisappear:
+//            return .none
+//          return .cancel(id: TimerID.self)
+            
         case .timerTicked:
             state.task.time += 1
             state.time += 1

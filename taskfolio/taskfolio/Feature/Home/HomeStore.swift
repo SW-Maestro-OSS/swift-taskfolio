@@ -109,6 +109,7 @@ struct HomeStore: ReducerProtocol {
                     
                 default:
                     return .none
+                        .cancellable(id: TaskTimerStopID.self, cancelInFlight: true)
                 }
             }
         }
