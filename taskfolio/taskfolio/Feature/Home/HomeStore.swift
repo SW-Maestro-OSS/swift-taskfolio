@@ -152,7 +152,7 @@ struct HomeStore: ReducerProtocol {
             case let .taskListCell(id, action):
                 switch action {
                 case .tapped:
-                    state.editTask = .init()
+                    state.editTask = .init(task: state.taskListCells.first(where: { $0.id == id })?.task ?? taskClient.newTask())
                     return .send(.setSheet(isPresented: true))
                     
                 case .toggleTimerButtonTapped:
@@ -180,6 +180,9 @@ struct HomeStore: ReducerProtocol {
         }
         .forEach(\.filteredTaskListCells, action: /Action.taskListCell(id:action:)) {
             TaskCellStore()
+        }
+        .ifLet(\.editTask, action: /Action.editTask) {
+            EditTaskStore()
         }
     }
 }

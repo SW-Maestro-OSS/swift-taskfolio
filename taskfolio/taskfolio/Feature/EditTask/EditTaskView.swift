@@ -15,14 +15,38 @@ struct EditTaskView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             VStack {
-                Text("Edit Task View")
+                HStack {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(alignment: .center) {
+                            ForEach(ColorType.allCases, id: \.rawValue) { colorType in
+                                Button {
+                                    viewStore.send(.colorChanged(colorType), animation: .default)
+                                } label: {
+                                    Image(systemName: "circle.fill")
+                                        .resizable()
+                                        .foregroundColor(colorType.color)
+                                        .frame(
+                                            width: viewStore.colorType == colorType ?  25 : 18,
+                                            height: viewStore.colorType == colorType ? 25 : 18
+                                        )
+                                }
+                            }
+                            Spacer()
+                        }
+                    }
+                }
+                .padding()
+                
+                TextField(
+                  "Untitled Task",
+                  text: viewStore.binding(get: \.title, send: EditTaskStore.Action.titleChanged)
+                )
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(.horizontal)
+                
+                Spacer()
             }
         }
-    }
-}
-
-struct EditTaskView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditTaskView(store: .init(initialState: .init(), reducer: EditTaskStore()._printChanges()))
     }
 }

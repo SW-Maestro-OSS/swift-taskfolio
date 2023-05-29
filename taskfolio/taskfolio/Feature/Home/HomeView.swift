@@ -75,6 +75,7 @@ struct HomeView: View {
                         }
                         .padding(.horizontal)
                         .padding(.horizontal)
+                        .padding(.bottom)
                     }
                     
                     List {

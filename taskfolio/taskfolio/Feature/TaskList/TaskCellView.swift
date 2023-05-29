@@ -18,7 +18,7 @@ struct TaskCellView: View {
                 HStack {
                     Divider()
                         .frame(width: 3, height: 15)
-                        .overlay(.red)
+                        .overlay(ColorType.toDomain(int16: viewStore.task.colorType).color)
                     
                     Text(viewStore.task.title ?? "Untitled Task")
                     

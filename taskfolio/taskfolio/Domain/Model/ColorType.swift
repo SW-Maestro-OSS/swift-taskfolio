@@ -9,21 +9,21 @@ import Foundation
 import SwiftUI
 
 enum ColorType: Int, CaseIterable {
-    case black
+    case red
+    case orange
+    case yellow
+    case green
     case blue
+    case purple
     case brown
     case cyan
     case gray
-    case green
     case indigo
     case mint
-    case orange
     case pink
-    case purple
-    case red
     case teal
     case white
-    case yellow
+    case black
     
     var color: Color {
         switch self {
