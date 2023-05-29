@@ -93,13 +93,21 @@ struct HomeView: View {
                     Spacer()
                     
                     HStack {
-                        Button("Start") {
+                        //TODO: User 선택 사항으로 변경
+                        /*
+                        Button(action: {
                             viewStore.send(.showActivity)
-                        }
+                        }, label: {
+                            Image(systemName: "iphone.badge.play")
+                                .imageScale(.large)
+                                .foregroundColor(Color(.label))
+                        })
+                        .padding(.horizontal)
+                        */
                         
                         Spacer()
                         
-                        Button(action:{
+                        Button(action: {
                             viewStore.send(.addButtonTapped)
                         }) {
                             Image(systemName: "square.and.pencil")
