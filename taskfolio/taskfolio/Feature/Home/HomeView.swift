@@ -126,6 +126,7 @@ struct HomeView: View {
                         EditButton()
                         
                         Button(action:{
+                            viewStore.send(.settingButtonTapped)
                         }) {
                             Image(systemName: "gearshape")
                                 .imageScale(.medium)
@@ -134,6 +135,11 @@ struct HomeView: View {
                 )
                 .navigationDestination(for: HomeScene.self) { scene in
                     switch scene {
+                    case .setting:
+                        IfLetStore(self.store.scope(state: \.setting, action: { .setting($0) })) {
+                            SettingView(store: $0)
+                        }
+                        
                     default:
                         EmptyView()
                     }

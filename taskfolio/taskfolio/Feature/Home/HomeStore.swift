@@ -43,10 +43,10 @@ struct HomeStore: ReducerProtocol {
         var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
         var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
         var editTask: EditTaskStore.State?
+        var setting: SettingStore.State?
         
         //MARK: ActivityKit
         var activity : Activity<DynamicWidgetAttributes>?
-        var activityContent: ActivityContent<DynamicWidgetAttributes.ContentState>?
     }
     
     enum Action: BindableAction, Equatable {
@@ -55,6 +55,7 @@ struct HomeStore: ReducerProtocol {
         case addButtonTapped
         case leftButtonTapped
         case rightButtonTapped
+        case settingButtonTapped
         case dateChanged(Date)
         case delete(IndexSet)
         case setSheet(isPresented: Bool)
@@ -73,10 +74,11 @@ struct HomeStore: ReducerProtocol {
         //MARK: Child Action
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
         case editTask(EditTaskStore.Action)
+        case setting(SettingStore.Action)
         
         //MARK: ActivityKit
-        case activityRequest(id: UUID, title: String, colorType: Int16)
-        case activityUpdateRequest(time: Int, isTimerActive: Bool)
+        case activityRequest
+        case activityUpdateRequest(title: String, colorType: Int16, time: Int32, isTimerActive: Bool)
         case activityUpdateResponse
     }
     
@@ -91,31 +93,6 @@ struct HomeStore: ReducerProtocol {
         Reduce<State, Action> { state, action in
             switch action {
             case .binding:
-                return .none
-                
-            case let .activityRequest(id, title, colorType):
-                if state.activity?.attributes.id == id { return .none }
-                
-                let initialContentState = DynamicWidgetAttributes.ContentState(time: 0)
-                let activityAttributes = DynamicWidgetAttributes(id: id, title: title, colorType: colorType)
-                
-                let content = ActivityContent(state: initialContentState, staleDate: Calendar.current.date(byAdding: .hour, value: 7, to: Date())!)
-                do {
-                    state.activity = try Activity.request(attributes: activityAttributes, content: content)
-                } catch {
-                    print(error)
-                }
-                return .none
-                
-            case let .activityUpdateRequest(time, isTimerActive):
-                let content = ActivityContent<DynamicWidgetAttributes.ContentState>.init(state: .init(time: time, isTimerActive: isTimerActive), staleDate: nil)
-                guard let activity = state.activity else { return .none }
-                return .task { [activity = activity] in
-                    await activity.update(content)
-                    return .activityUpdateResponse
-                }
-                
-            case .activityUpdateResponse:
                 return .none
                 
             case .addButtonTapped:
@@ -134,6 +111,11 @@ struct HomeStore: ReducerProtocol {
             case .rightButtonTapped:
                 return .send(.dateChanged(state.currentDate.add(byAdding: .day, value: 7)))
                 
+            case .settingButtonTapped:
+                state.path.append(.setting)
+                state.setting = .init()
+                return .none
+                
             case let .dateChanged(date):
                 state.currentDate = date
                 state.currentWeekDates = date.weekDates()
@@ -141,7 +123,7 @@ struct HomeStore: ReducerProtocol {
                 
             case let .delete(indexSet):
                 for index in indexSet {
-                    let id = state.taskListCells[index].task.objectID
+                    let id = state.filteredTaskListCells[index].task.objectID
                     taskClient.delete(id)
                 }
                 return .send(.refresh)
@@ -168,7 +150,7 @@ struct HomeStore: ReducerProtocol {
                             return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
                         }
                     })))),
-                    .send(.activityUpdateRequest(time: Int(task?.time ?? 0), isTimerActive: state.isTimerActive))
+                    .send(.activityUpdateRequest(title: task?.title ?? "", colorType: task?.colorType ?? 0, time: task?.time ?? 0, isTimerActive: state.isTimerActive))
                 ])
                 
             case .refresh:
@@ -213,7 +195,7 @@ struct HomeStore: ReducerProtocol {
                     state.isTimerActive = false
                     let task = state.taskListCells.first(where: { $0.id == id })?.task
                     return .concatenate([
-                        .send(.activityRequest(id: id, title: task?.title ?? "Task", colorType: task?.colorType ?? 0)),
+                        .send(.activityRequest),
                         .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
                             let isTimerActive = $0.isTimerActive ? false : (id == $0.id)
                             state.timerTaskCellID = isTimerActive ? id : state.timerTaskCellID
@@ -227,10 +209,38 @@ struct HomeStore: ReducerProtocol {
                             }
                         }
                             .cancellable(id: TimerID.self, cancelInFlight: true),
-                        .send(.activityUpdateRequest(time: Int(task?.time ?? 0), isTimerActive: state.isTimerActive))
+                        .send(.activityUpdateRequest(title: task?.title ?? "", colorType: task?.colorType ?? 0, time: task?.time ?? 0, isTimerActive: state.isTimerActive))
                     ])
                 }
             case .editTask:
+                return .none
+                
+            case .setting:
+                return .none
+                
+            case .activityRequest:
+                if state.activity != nil { return .none }
+                
+                let initialContentState = DynamicWidgetAttributes.ContentState(title: "Task", colorType: 0, time: 0)
+                let activityAttributes = DynamicWidgetAttributes()
+                
+                let content = ActivityContent(state: initialContentState, staleDate: Calendar.current.date(byAdding: .hour, value: 7, to: Date())!)
+                do {
+                    state.activity = try Activity.request(attributes: activityAttributes, content: content)
+                } catch {
+                    print(error)
+                }
+                return .none
+                
+            case let .activityUpdateRequest(title, colorType, time, isTimerActive):
+                let content = ActivityContent<DynamicWidgetAttributes.ContentState>.init(state: .init(title: title, colorType: colorType, time: time, isTimerActive: isTimerActive), staleDate: nil)
+                guard let activity = state.activity else { return .none }
+                return .task { [activity = activity] in
+                    await activity.update(content)
+                    return .activityUpdateResponse
+                }
+                
+            case .activityUpdateResponse:
                 return .none
             }
         }

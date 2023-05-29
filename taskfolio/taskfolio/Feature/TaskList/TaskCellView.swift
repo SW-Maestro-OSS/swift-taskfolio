@@ -41,6 +41,7 @@ struct TaskCellView: View {
                         .font(.caption)
                 }
             }
+            .contentShape(Rectangle())
             .onTapGesture {
                 viewStore.send(.tapped)
             }

@@ -12,14 +12,13 @@ import SwiftUI
 struct DynamicWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var time: Int
+        var title: String
+        var colorType: Int16
+        var time: Int32
         var isTimerActive: Bool = true
     }
     
     // Fixed non-changing properties about your activity go here!
-    var id: UUID
-    var title: String
-    var colorType: Int16
 }
 
 struct DynamicWidgetLiveActivity: Widget {
@@ -29,9 +28,9 @@ struct DynamicWidgetLiveActivity: Widget {
             HStack {
                 Divider()
                     .frame(width: 3, height: 15)
-                    .overlay(ColorType.toDomain(int16: context.attributes.colorType).color)
+                    .overlay(ColorType.toDomain(int16: context.state.colorType).color)
                 
-                Text(context.attributes.title)
+                Text(context.state.title)
                     .font(.title2)
                 
                 Spacer()
@@ -40,7 +39,7 @@ struct DynamicWidgetLiveActivity: Widget {
                     Image(systemName: context.state.isTimerActive ? "pause.circle" : "play.circle")
                         .font(.title2)
                     
-                    Text(TimeManager.shared.toString(second: context.state.time))
+                    Text(TimeManager.shared.toString(second: Int(context.state.time)))
                         .font(.caption)
                 }
             }
@@ -56,13 +55,13 @@ struct DynamicWidgetLiveActivity: Widget {
                     HStack {
                         Divider()
                             .frame(width: 3, height: 15)
-                            .overlay(ColorType.toDomain(int16: context.attributes.colorType).color)
+                            .overlay(ColorType.toDomain(int16: context.state.colorType).color)
                         
-                        Text(context.attributes.title)
+                        Text(context.state.title)
                     }
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text(TimeManager.shared.toString(second: context.state.time))
+                    Text(TimeManager.shared.toString(second: Int(context.state.time)))
                 }
                 DynamicIslandExpandedRegion(.bottom) {
                     
@@ -71,12 +70,12 @@ struct DynamicWidgetLiveActivity: Widget {
                 HStack {
                     Divider()
                         .frame(width: 3, height: 15)
-                        .overlay(ColorType.toDomain(int16: context.attributes.colorType).color)
+                        .overlay(ColorType.toDomain(int16: context.state.colorType).color)
                     
-                    Text(context.attributes.title)
+                    Text(context.state.title)
                 }
             } compactTrailing: {
-                Text(TimeManager.shared.toString(second: context.state.time))
+                Text(TimeManager.shared.toString(second: Int(context.state.time)))
                     .font(.caption)
             } minimal: {
                 VStack(alignment: .center) {
