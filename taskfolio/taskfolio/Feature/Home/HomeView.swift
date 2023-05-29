@@ -8,6 +8,8 @@
 import SwiftUI
 
 import ComposableArchitecture
+import WidgetKit
+import ActivityKit
 
 struct HomeView: View {
     public let store: StoreOf<HomeStore>
@@ -91,6 +93,21 @@ struct HomeView: View {
                     Spacer()
                     
                     HStack {
+                        Button("Start") {
+                            let dynamicIslandWidgetAttributes = DynamicWidgetAttributes.init(name: "test")
+                            let contentState: ActivityContent<DynamicWidgetAttributes.ContentState> = .init(state: .init(value: 7), staleDate: .distantFuture)
+                            
+                            do {
+                                let activity = try Activity<DynamicWidgetAttributes>.request(
+                                    attributes: dynamicIslandWidgetAttributes,
+                                    content: contentState
+                                )
+                                print("[D] activity \(activity)")
+                            } catch {
+                                print("[D] error \(error)")
+                            }
+                        }
+                        
                         Spacer()
                         
                         Button(action:{

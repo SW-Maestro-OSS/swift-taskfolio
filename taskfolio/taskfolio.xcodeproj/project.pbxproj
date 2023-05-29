@@ -26,10 +26,44 @@
 		70BCDFC32A234909002AE1CC /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC22A234909002AE1CC /* TimeManager.swift */; };
 		70BCDFC62A2471D8002AE1CC /* EditTaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC52A2471D8002AE1CC /* EditTaskStore.swift */; };
 		70BCDFC82A2471E1002AE1CC /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC72A2471E1002AE1CC /* EditTaskView.swift */; };
+		70BCDFED2A248117002AE1CC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BCDFCF2A247EF2002AE1CC /* WidgetKit.framework */; };
+		70BCDFEE2A248117002AE1CC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70BCDFD12A247EF2002AE1CC /* SwiftUI.framework */; };
+		70BCDFF12A248117002AE1CC /* DynamicWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF02A248117002AE1CC /* DynamicWidgetBundle.swift */; };
+		70BCDFF32A248117002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF22A248117002AE1CC /* DynamicWidgetLiveActivity.swift */; };
+		70BCDFF52A248117002AE1CC /* DynamicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF42A248117002AE1CC /* DynamicWidget.swift */; };
+		70BCDFF82A248118002AE1CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70BCDFF72A248118002AE1CC /* Assets.xcassets */; };
+		70BCDFFA2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */; };
+		70BCDFFB2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */; };
+		70BCDFFE2A248118002AE1CC /* DynamicWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70BCDFEC2A248117002AE1CC /* DynamicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		70BCE0022A24812A002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF22A248117002AE1CC /* DynamicWidgetLiveActivity.swift */; };
 		70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */; };
 		70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F90E2A1E128C00099F17 /* Assets.xcassets */; };
 		70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		70BCDFFC2A248118002AE1CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 70D2F8FF2A1E128B00099F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 70BCDFEB2A248117002AE1CC;
+			remoteInfo = DynamicWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		70BCDFE62A247EF4002AE1CC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				70BCDFFE2A248118002AE1CC /* DynamicWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		703D559A2A1F15C7003BB6D7 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -51,6 +85,15 @@
 		70BCDFC22A234909002AE1CC /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
 		70BCDFC52A2471D8002AE1CC /* EditTaskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskStore.swift; sourceTree = "<group>"; };
 		70BCDFC72A2471E1002AE1CC /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		70BCDFCF2A247EF2002AE1CC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		70BCDFD12A247EF2002AE1CC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		70BCDFEC2A248117002AE1CC /* DynamicWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DynamicWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		70BCDFF02A248117002AE1CC /* DynamicWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicWidgetBundle.swift; sourceTree = "<group>"; };
+		70BCDFF22A248117002AE1CC /* DynamicWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		70BCDFF42A248117002AE1CC /* DynamicWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicWidget.swift; sourceTree = "<group>"; };
+		70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DynamicWidget.intentdefinition; sourceTree = "<group>"; };
+		70BCDFF72A248118002AE1CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		70BCDFF92A248118002AE1CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70D2F9072A1E128B00099F17 /* taskfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskfolioApp.swift; sourceTree = "<group>"; };
 		70D2F90E2A1E128C00099F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,6 +102,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		70BCDFE92A248117002AE1CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70BCDFEE2A248117002AE1CC /* SwiftUI.framework in Frameworks */,
+				70BCDFED2A248117002AE1CC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70D2F9042A1E128B00099F17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -188,10 +240,34 @@
 			path = EditTask;
 			sourceTree = "<group>";
 		};
+		70BCDFCE2A247EF2002AE1CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70BCDFCF2A247EF2002AE1CC /* WidgetKit.framework */,
+				70BCDFD12A247EF2002AE1CC /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		70BCDFEF2A248117002AE1CC /* DynamicWidget */ = {
+			isa = PBXGroup;
+			children = (
+				70BCDFF02A248117002AE1CC /* DynamicWidgetBundle.swift */,
+				70BCDFF22A248117002AE1CC /* DynamicWidgetLiveActivity.swift */,
+				70BCDFF42A248117002AE1CC /* DynamicWidget.swift */,
+				70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */,
+				70BCDFF72A248118002AE1CC /* Assets.xcassets */,
+				70BCDFF92A248118002AE1CC /* Info.plist */,
+			);
+			path = DynamicWidget;
+			sourceTree = "<group>";
+		};
 		70D2F8FE2A1E128B00099F17 = {
 			isa = PBXGroup;
 			children = (
 				70D2F9092A1E128B00099F17 /* taskfolio */,
+				70BCDFEF2A248117002AE1CC /* DynamicWidget */,
+				70BCDFCE2A247EF2002AE1CC /* Frameworks */,
 				70D2F9082A1E128B00099F17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -200,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				70D2F9072A1E128B00099F17 /* taskfolio.app */,
+				70BCDFEC2A248117002AE1CC /* DynamicWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,6 +308,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		70BCDFEB2A248117002AE1CC /* DynamicWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 70BCDFFF2A248118002AE1CC /* Build configuration list for PBXNativeTarget "DynamicWidgetExtension" */;
+			buildPhases = (
+				70BCDFE82A248117002AE1CC /* Sources */,
+				70BCDFE92A248117002AE1CC /* Frameworks */,
+				70BCDFEA2A248117002AE1CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DynamicWidgetExtension;
+			productName = DynamicWidgetExtension;
+			productReference = 70BCDFEC2A248117002AE1CC /* DynamicWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		70D2F9062A1E128B00099F17 /* taskfolio */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 70D2F91B2A1E128C00099F17 /* Build configuration list for PBXNativeTarget "taskfolio" */;
@@ -238,10 +332,12 @@
 				70D2F9032A1E128B00099F17 /* Sources */,
 				70D2F9042A1E128B00099F17 /* Frameworks */,
 				70D2F9052A1E128B00099F17 /* Resources */,
+				70BCDFE62A247EF4002AE1CC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				70BCDFFD2A248118002AE1CC /* PBXTargetDependency */,
 			);
 			name = taskfolio;
 			packageProductDependencies = (
@@ -261,6 +357,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					70BCDFEB2A248117002AE1CC = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					70D2F9062A1E128B00099F17 = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -283,11 +382,20 @@
 			projectRoot = "";
 			targets = (
 				70D2F9062A1E128B00099F17 /* taskfolio */,
+				70BCDFEB2A248117002AE1CC /* DynamicWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		70BCDFEA2A248117002AE1CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70BCDFF82A248118002AE1CC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70D2F9052A1E128B00099F17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,6 +408,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		70BCDFE82A248117002AE1CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70BCDFFA2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */,
+				70BCDFF32A248117002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */,
+				70BCDFF12A248117002AE1CC /* DynamicWidgetBundle.swift in Sources */,
+				70BCDFF52A248117002AE1CC /* DynamicWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		70D2F9032A1E128B00099F17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,9 +431,11 @@
 				70BCDFC32A234909002AE1CC /* TimeManager.swift in Sources */,
 				703D55B62A1F4557003BB6D7 /* SettingView.swift in Sources */,
 				703D55AC2A1F4093003BB6D7 /* TaskCellStore.swift in Sources */,
+				70BCDFFB2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */,
 				703D55AA2A1F408D003BB6D7 /* TaskCellView.swift in Sources */,
 				703D55B22A1F438A003BB6D7 /* TaskCloudManager.swift in Sources */,
 				703D55C42A1F5AC8003BB6D7 /* Array+Extension.swift in Sources */,
+				70BCE0022A24812A002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */,
 				703D55BA2A1F53FE003BB6D7 /* Date+Extension.swift in Sources */,
 				703D55A52A1F16BC003BB6D7 /* HomeStore.swift in Sources */,
 				703D55A72A1F3F82003BB6D7 /* HomeView.swift in Sources */,
@@ -328,7 +449,69 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		70BCDFFD2A248118002AE1CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 70BCDFEB2A248117002AE1CC /* DynamicWidgetExtension */;
+			targetProxy = 70BCDFFC2A248118002AE1CC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		70BCE0002A248118002AE1CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X64MATB2CC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annapo.taskfolio.DynamicWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		70BCE0012A248118002AE1CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X64MATB2CC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DynamicWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = DynamicWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.annapo.taskfolio.DynamicWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		70D2F9192A1E128C00099F17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -446,6 +629,7 @@
 		70D2F91C2A1E128C00099F17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = taskfolio/taskfolio.entitlements;
@@ -456,6 +640,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = taskfolio/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,6 +662,7 @@
 		70D2F91D2A1E128C00099F17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = taskfolio/taskfolio.entitlements;
@@ -487,6 +673,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = taskfolio/Info.plist;
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -508,6 +695,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		70BCDFFF2A248118002AE1CC /* Build configuration list for PBXNativeTarget "DynamicWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70BCE0002A248118002AE1CC /* Debug */,
+				70BCE0012A248118002AE1CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		70D2F9022A1E128B00099F17 /* Build configuration list for PBXProject "taskfolio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
