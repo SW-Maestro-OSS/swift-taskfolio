@@ -14,7 +14,7 @@ struct DynamicWidgetAttributes: ActivityAttributes {
         // Dynamic stateful properties about your activity go here!
         var value: Int
     }
-
+    
     // Fixed non-changing properties about your activity go here!
     var name: String
 }
@@ -23,12 +23,24 @@ struct DynamicWidgetLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: DynamicWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
-            VStack {
+            HStack {
                 Text("Hello")
+                    .font(.title2)
+                
+                Spacer()
+                
+                VStack {
+                    Image(systemName: "play.circle")
+                        .font(.title2)
+                    
+                    Text("00:00:11")
+                        .font(.caption)
+                }
             }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
-
+            .padding()
+            .activityBackgroundTint(Color.black)
+            .activitySystemActionForegroundColor(Color.white)
+            
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
@@ -48,7 +60,13 @@ struct DynamicWidgetLiveActivity: Widget {
             } compactTrailing: {
                 Text("T")
             } minimal: {
-                Text("Min")
+                VStack(alignment: .center) {
+                    Image(systemName: "timer")
+                    //                    Text("ㅇㅇ")
+                    //                        .multilineTextAlignment(.center)
+                    //                        .monospacedDigit()
+                    //                        .font(.caption2)
+                }
             }
             .widgetURL(URL(string: "http://www.apple.com"))
             .keylineTint(Color.red)
@@ -59,7 +77,7 @@ struct DynamicWidgetLiveActivity: Widget {
 struct DynamicWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = DynamicWidgetAttributes(name: "Me")
     static let contentState = DynamicWidgetAttributes.ContentState(value: 3)
-
+    
     static var previews: some View {
         attributes
             .previewContext(contentState, viewKind: .dynamicIsland(.compact))

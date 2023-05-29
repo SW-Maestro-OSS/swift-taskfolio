@@ -102,9 +102,9 @@ struct HomeView: View {
                                     attributes: dynamicIslandWidgetAttributes,
                                     content: contentState
                                 )
-                                print("[D] activity \(activity)")
+                                print(activity)
                             } catch {
-                                print("[D] error \(error)")
+                                print(error)
                             }
                         }
                         
