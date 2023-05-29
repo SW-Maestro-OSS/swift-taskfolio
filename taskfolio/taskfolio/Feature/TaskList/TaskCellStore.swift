@@ -20,26 +20,19 @@ struct TaskCellStore: ReducerProtocol {
         init(id: UUID, task: Task, isTimerActive: Bool = false) {
             self.id = id
             self.task = task
-            self.title = task.title ?? ""
             self.isTimerActive = isTimerActive
         }
     }
     
     enum Action: Equatable {
-        case textFieldChanged(String)
+        case tapped
         case toggleTimerButtonTapped
     }
     
-    @Dependency(\.taskClient) var taskClient
-    
     func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
-        case let .textFieldChanged(title):
-//            state.task.title = title
-//            state.title = title
-//            taskClient.save()
+        case .tapped:
             return .none
-            
         case .toggleTimerButtonTapped:
             state.isTimerActive.toggle()
             return .none

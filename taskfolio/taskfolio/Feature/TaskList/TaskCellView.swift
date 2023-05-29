@@ -20,10 +20,7 @@ struct TaskCellView: View {
                         .frame(width: 3, height: 15)
                         .overlay(.red)
                     
-                    TextField(
-                      "Untitled Task",
-                      text: viewStore.binding(get: \.title, send: TaskCellStore.Action.textFieldChanged)
-                    )
+                    Text(viewStore.task.title ?? "Untitled Task")
                     
                     Spacer()
                     
@@ -34,6 +31,7 @@ struct TaskCellView: View {
                             .imageScale(.large)
                             .foregroundColor(Color(.label))
                     })
+                    .buttonStyle(.plain)
                 }
                 
                 HStack {
@@ -42,6 +40,9 @@ struct TaskCellView: View {
                     Text(TimeManager.shared.toString(second: Int(viewStore.task.time)))
                         .font(.caption)
                 }
+            }
+            .onTapGesture {
+                viewStore.send(.tapped)
             }
         }
     }

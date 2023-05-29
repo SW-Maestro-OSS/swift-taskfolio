@@ -20,6 +20,7 @@ struct HomeStore: ReducerProtocol {
         
         var currentWeekDates: [Date] = Date().weekDates()
         var currentDate: Date = Date()
+        var isSheetPresented = false
         
         var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
         var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
@@ -27,6 +28,8 @@ struct HomeStore: ReducerProtocol {
         var timerTaskCellID: UUID?
         var isTimerActive: Bool = false
         var timeSum: Int = 0
+        
+        var editTask: EditTaskStore.State?
     }
     
     enum Action: BindableAction, Equatable {
@@ -37,6 +40,7 @@ struct HomeStore: ReducerProtocol {
         case rightButtonTapped
         case dateChanged(Date)
         case delete(IndexSet)
+        case setSheet(isPresented: Bool)
         
         case timerTicked
         
@@ -50,6 +54,7 @@ struct HomeStore: ReducerProtocol {
         case updateFilteredTaskListCells(IdentifiedArrayOf<TaskCellStore.State>)
         
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
+        case editTask(EditTaskStore.Action)
     }
     
     @Dependency(\.taskClient) var taskClient
@@ -92,6 +97,15 @@ struct HomeStore: ReducerProtocol {
                     taskClient.delete(id)
                 }
                 return .send(.refresh)
+                
+            case .setSheet(isPresented: true):
+                state.isSheetPresented = true
+                return .none
+                
+            case .setSheet(isPresented: false):
+                state.isSheetPresented = false
+                state.editTask = nil
+                return .none
                 
             case .timerTicked:
                 return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
@@ -137,6 +151,10 @@ struct HomeStore: ReducerProtocol {
                 
             case let .taskListCell(id, action):
                 switch action {
+                case .tapped:
+                    state.editTask = .init()
+                    return .send(.setSheet(isPresented: true))
+                    
                 case .toggleTimerButtonTapped:
                     state.timerTaskCellID = nil
                     state.isTimerActive = false
@@ -155,16 +173,9 @@ struct HomeStore: ReducerProtocol {
                         }
                             .cancellable(id: TimerID.self, cancelInFlight: true)
                     ])
-                    
-                case let .textFieldChanged(title):
-                    return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
-                        if $0.id == id {
-                            $0.task.title = title
-                            taskClient.save()
-                        }
-                        return .init(id: UUID(), task: $0.task, isTimerActive: $0.isTimerActive)
-                    }))))
                 }
+            case .editTask:
+                return .none
             }
         }
         .forEach(\.filteredTaskListCells, action: /Action.taskListCell(id:action:)) {

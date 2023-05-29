@@ -70,7 +70,7 @@ struct HomeView: View {
                         
                         HStack {
                             Spacer()
-
+                            
                             Text(TimeManager.shared.toString(second: viewStore.timeSum))
                         }
                         .padding(.horizontal)
@@ -121,6 +121,12 @@ struct HomeView: View {
                     switch scene {
                     default:
                         EmptyView()
+                    }
+                }
+                .sheet(isPresented: viewStore.binding(get: \.isSheetPresented, send: HomeStore.Action.setSheet(isPresented:))) {
+                    IfLetStore(self.store.scope(state: \.editTask, action: HomeStore.Action.editTask)) {
+                        EditTaskView(store: $0)
+                            .presentationDetents([.medium])
                     }
                 }
             }
