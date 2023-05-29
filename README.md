@@ -5,6 +5,10 @@ iOS 16 버전부터 지원하는 ActivityKit을 사용한 잠금화면 위젯과
 
 단순 샘플 앱이지만 출시까지 하려합니다.
 
+## 미리보기
+
+<img src="https://github.com/SW-Maestro-OSS/swift-taskfolio/assets/77970826/10b219c9-9684-4f99-a906-3472079a678c" width="40%">
+
 ## 4 Layer 구성
 
 - Feature

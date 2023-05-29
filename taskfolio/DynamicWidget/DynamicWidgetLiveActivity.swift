@@ -32,15 +32,18 @@ struct DynamicWidgetLiveActivity: Widget {
                 
                 Text(context.state.title)
                     .font(.title2)
+                    .foregroundColor(.white)
                 
                 Spacer()
                 
                 VStack {
                     Image(systemName: context.state.isTimerActive ? "pause.circle" : "play.circle")
                         .font(.title2)
+                        .foregroundColor(.white)
                     
                     Text(TimeManager.shared.toString(second: Int(context.state.time)))
                         .font(.caption)
+                        .foregroundColor(.white)
                 }
             }
             .padding()
