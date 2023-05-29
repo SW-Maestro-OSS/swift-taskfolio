@@ -23,6 +23,7 @@
 		703D55C02A1F59C0003BB6D7 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55BF2A1F59C0003BB6D7 /* Color+Extension.swift */; };
 		703D55C22A1F59D6003BB6D7 /* ColorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55C12A1F59D6003BB6D7 /* ColorType.swift */; };
 		703D55C42A1F5AC8003BB6D7 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703D55C32A1F5AC8003BB6D7 /* Array+Extension.swift */; };
+		70A1F6E32A2491ED00F0524A /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC22A234909002AE1CC /* TimeManager.swift */; };
 		70BCDFC32A234909002AE1CC /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC22A234909002AE1CC /* TimeManager.swift */; };
 		70BCDFC62A2471D8002AE1CC /* EditTaskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC52A2471D8002AE1CC /* EditTaskStore.swift */; };
 		70BCDFC82A2471E1002AE1CC /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFC72A2471E1002AE1CC /* EditTaskView.swift */; };
@@ -415,6 +416,7 @@
 				70BCDFFA2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */,
 				70BCDFF32A248117002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */,
 				70BCDFF12A248117002AE1CC /* DynamicWidgetBundle.swift in Sources */,
+				70A1F6E32A2491ED00F0524A /* TimeManager.swift in Sources */,
 				70BCDFF52A248117002AE1CC /* DynamicWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

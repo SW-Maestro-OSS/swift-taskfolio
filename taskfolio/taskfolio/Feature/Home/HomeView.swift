@@ -94,18 +94,7 @@ struct HomeView: View {
                     
                     HStack {
                         Button("Start") {
-                            let dynamicIslandWidgetAttributes = DynamicWidgetAttributes.init(name: "test")
-                            let contentState: ActivityContent<DynamicWidgetAttributes.ContentState> = .init(state: .init(value: 7), staleDate: .distantFuture)
-                            
-                            do {
-                                let activity = try Activity<DynamicWidgetAttributes>.request(
-                                    attributes: dynamicIslandWidgetAttributes,
-                                    content: contentState
-                                )
-                                print(activity)
-                            } catch {
-                                print(error)
-                            }
+                            viewStore.send(.showActivity)
                         }
                         
                         Spacer()

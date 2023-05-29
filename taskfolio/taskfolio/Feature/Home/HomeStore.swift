@@ -8,6 +8,19 @@
 import Foundation
 
 import ComposableArchitecture
+import ActivityKit
+
+extension ActivityContent<DynamicWidgetAttributes.ContentState>: Equatable {
+    public static func == (lhs: ActivityContent, rhs: ActivityContent) -> Bool {
+        return lhs.state.hashValue == rhs.state.hashValue
+    }
+}
+
+extension Activity<DynamicWidgetAttributes>: Equatable {
+    public static func == (lhs: Activity<Attributes>, rhs: Activity<Attributes>) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
 
 enum HomeScene: Hashable {
     case home
@@ -21,15 +34,19 @@ struct HomeStore: ReducerProtocol {
         var currentWeekDates: [Date] = Date().weekDates()
         var currentDate: Date = Date()
         var isSheetPresented = false
-        
-        var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
-        var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
+        var timeSum: Int = 0
         
         var timerTaskCellID: UUID?
         var isTimerActive: Bool = false
-        var timeSum: Int = 0
         
+        //MARK: Child State
+        var taskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
+        var filteredTaskListCells: IdentifiedArrayOf<TaskCellStore.State> = []
         var editTask: EditTaskStore.State?
+        
+        //MARK: ActivityKit
+        var activity : Activity<DynamicWidgetAttributes>?
+        var activityContent: ActivityContent<DynamicWidgetAttributes.ContentState>?
     }
     
     enum Action: BindableAction, Equatable {
@@ -53,8 +70,15 @@ struct HomeStore: ReducerProtocol {
         case updateTaskListCells(IdentifiedArrayOf<TaskCellStore.State>)
         case updateFilteredTaskListCells(IdentifiedArrayOf<TaskCellStore.State>)
         
+        //MARK: Child Action
         case taskListCell(id: TaskCellStore.State.ID, action: TaskCellStore.Action)
         case editTask(EditTaskStore.Action)
+        
+        //MARK: ActivityKit
+        case showActivity
+        case activityRequest(ActivityContent<DynamicWidgetAttributes.ContentState>)
+        case activityUpdateRequest(ActivityContent<DynamicWidgetAttributes.ContentState>)
+        case activityUpdateResponse
     }
     
     @Dependency(\.taskClient) var taskClient
@@ -68,6 +92,28 @@ struct HomeStore: ReducerProtocol {
         Reduce<State, Action> { state, action in
             switch action {
             case .binding:
+                return .none
+                
+            case .showActivity:
+                return .send(.activityRequest(.init(state: .init(title: "Task", time: 0), staleDate: Calendar.current.date(byAdding: .minute, value: 50, to: Date())!)))
+                
+            case let .activityRequest(content):
+                let activityAttributes = DynamicWidgetAttributes(name: "not use")
+                do {
+                    state.activity = try Activity.request(attributes: activityAttributes, content: content)
+                } catch {
+                    print(error)
+                }
+                return .none
+                
+            case let .activityUpdateRequest(content):
+                return .task { [activity = state.activity] in
+                    await activity?.update(content)
+                    return .activityUpdateResponse
+                }
+                
+            case .activityUpdateResponse:
+                print("[D] activity updated")
                 return .none
                 
             case .addButtonTapped:
@@ -108,15 +154,20 @@ struct HomeStore: ReducerProtocol {
                 return .none
                 
             case .timerTicked:
-                return .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
-                    if $0.id == state.timerTaskCellID {
-                        $0.task.time += 1
-                        taskClient.save()
-                        return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
-                    } else {
-                        return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
-                    }
-                }))))
+                let task = state.taskListCells.first(where: { $0.id == state.timerTaskCellID })?.task
+                
+                return .concatenate([
+                    .send(.updateTaskListCells(.init(uniqueElements: state.taskListCells.map({
+                        if $0.id == state.timerTaskCellID {
+                            $0.task.time += 1
+                            taskClient.save()
+                            return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
+                        } else {
+                            return .init(id: $0.id, task: $0.task, isTimerActive: $0.isTimerActive)
+                        }
+                    })))),
+                    .send(.activityUpdateRequest(.init(state: .init(title: task?.title, time: Int(task?.time ?? 0)), staleDate: nil)))
+                ])
                 
             case .refresh:
                 return .concatenate([

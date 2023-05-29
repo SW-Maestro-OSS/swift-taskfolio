@@ -12,7 +12,8 @@ import SwiftUI
 struct DynamicWidgetAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
-        var value: Int
+        var title: String?
+        var time: Int?
     }
     
     // Fixed non-changing properties about your activity go here!
@@ -24,7 +25,7 @@ struct DynamicWidgetLiveActivity: Widget {
         ActivityConfiguration(for: DynamicWidgetAttributes.self) { context in
             // Lock screen/banner UI goes here
             HStack {
-                Text("Hello")
+                Text(context.state.title ?? "")
                     .font(.title2)
                 
                 Spacer()
@@ -33,7 +34,7 @@ struct DynamicWidgetLiveActivity: Widget {
                     Image(systemName: "play.circle")
                         .font(.title2)
                     
-                    Text("00:00:11")
+                    Text(TimeManager.shared.toString(second: context.state.time ?? 0))
                         .font(.caption)
                 }
             }
@@ -76,7 +77,7 @@ struct DynamicWidgetLiveActivity: Widget {
 
 struct DynamicWidgetLiveActivity_Previews: PreviewProvider {
     static let attributes = DynamicWidgetAttributes(name: "Me")
-    static let contentState = DynamicWidgetAttributes.ContentState(value: 3)
+    static let contentState = DynamicWidgetAttributes.ContentState(title: "Task", time: 00)
     
     static var previews: some View {
         attributes
