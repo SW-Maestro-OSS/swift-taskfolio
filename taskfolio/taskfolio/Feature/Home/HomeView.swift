@@ -106,6 +106,15 @@ struct HomeView: View {
                         */
                         
                         Spacer()
+
+                        Button(action: {
+                            
+                        }) {
+                            Image(systemName: "flame")
+                                .imageScale(.large)
+                                .foregroundColor(Color(.label))
+                        }
+                        .padding(.horizontal)
                         
                         Button(action: {
                             viewStore.send(.addButtonTapped)
