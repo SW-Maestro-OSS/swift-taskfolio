@@ -9,6 +9,7 @@ import Foundation
 
 import ComposableArchitecture
 import ActivityKit
+import AVFAudio
 
 extension ActivityContent<DynamicWidgetAttributes.ContentState>: Equatable {
     public static func == (lhs: ActivityContent, rhs: ActivityContent) -> Bool {
@@ -47,15 +48,20 @@ struct HomeStore: ReducerProtocol {
         
         //MARK: ActivityKit
         var activity : Activity<DynamicWidgetAttributes>?
+        
+        //MARK: Audio
+        var audioPlayer: AVAudioPlayer?
     }
     
     enum Action: BindableAction, Equatable {
         case binding(BindingAction<State>)
         
+        case onAppear
         case addButtonTapped
         case leftButtonTapped
         case rightButtonTapped
         case settingButtonTapped
+        case fireButtonTapped
         case dateChanged(Date)
         case delete(IndexSet)
         case setSheet(isPresented: Bool)
@@ -95,6 +101,9 @@ struct HomeStore: ReducerProtocol {
             case .binding:
                 return .none
                 
+            case .onAppear:
+                return .send(.refresh)
+                
             case .addButtonTapped:
                 let newTask = taskClient.newTask()
                 newTask.title = "untitled"
@@ -114,6 +123,26 @@ struct HomeStore: ReducerProtocol {
             case .settingButtonTapped:
                 state.path.append(.setting)
                 state.setting = .init()
+                return .none
+                
+            case .fireButtonTapped:
+                if let audioPlayer = state.audioPlayer {
+                    if audioPlayer.isPlaying == true {
+                        audioPlayer.stop()
+                    } else {
+                        audioPlayer.play()
+                    }
+                } else {
+                    let sound = Bundle.main.path(forResource: "fire", ofType: "mp3")
+                    do {
+                        state.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
+                        state.audioPlayer?.numberOfLoops =  -1
+                        state.audioPlayer?.prepareToPlay()
+                        state.audioPlayer?.play()
+                    } catch {
+                        print(error)
+                    }
+                }
                 return .none
                 
             case let .dateChanged(date):

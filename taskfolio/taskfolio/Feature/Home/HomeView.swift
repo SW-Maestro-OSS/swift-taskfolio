@@ -105,6 +105,15 @@ struct HomeView: View {
                         .padding(.horizontal)
                         */
                         
+                        Button(action: {
+                            viewStore.send(.fireButtonTapped)
+                        }) {
+                            Image(systemName: "flame")
+                                .imageScale(.large)
+                                .foregroundColor(Color(.label))
+                        }
+                        .padding(.horizontal)
+                        
                         Spacer()
                         
                         Button(action: {
@@ -117,8 +126,8 @@ struct HomeView: View {
                         .padding(.horizontal)
                     }
                 }
-                .task {
-                    viewStore.send(.refresh)
+                .onAppear {
+                    viewStore.send(.onAppear)
                 }
                 .navigationTitle("Taskfolio")
                 .navigationBarItems(
