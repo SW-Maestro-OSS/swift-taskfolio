@@ -3,7 +3,9 @@ CoreData, CloudKit, WidgetKit, ActivityKit을 사용한 투두 리스트 서비�
 
 iOS 16 버전부터 지원하는 ActivityKit을 사용한 잠금화면 위젯과 다이나믹 아일랜드 앱을 제작합니다.
 
-단순 샘플 앱이지만 출시까지 하려합니다.
+<p align="center">
+<a href="https://apps.apple.com/app/id6449679061" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1641254400&h=ddfff0c3bd61d9f88f53494b401881d3" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
+</p>
 
 ## 미리보기
 
