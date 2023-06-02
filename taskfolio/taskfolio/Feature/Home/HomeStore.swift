@@ -137,6 +137,7 @@ struct HomeStore: ReducerProtocol {
                     do {
                         state.audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
                         state.audioPlayer?.numberOfLoops =  -1
+                        state.audioPlayer?.prepareToPlay()
                         state.audioPlayer?.play()
                     } catch {
                         print(error)
