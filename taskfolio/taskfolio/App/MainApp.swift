@@ -8,7 +8,9 @@
 import SwiftUI
 
 @main
-struct taskfolioApp: App {
+struct MainApp: App {
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    
     var body: some Scene {
         WindowGroup {
             RootView(store: .init(initialState: .init(), reducer: RootStore()._printChanges()))

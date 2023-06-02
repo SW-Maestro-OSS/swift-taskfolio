@@ -38,7 +38,9 @@
 		70BCDFFB2A248118002AE1CC /* DynamicWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */; };
 		70BCDFFE2A248118002AE1CC /* DynamicWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 70BCDFEC2A248117002AE1CC /* DynamicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		70BCE0022A24812A002AE1CC /* DynamicWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BCDFF22A248117002AE1CC /* DynamicWidgetLiveActivity.swift */; };
-		70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */; };
+		70CDC9E82A29CD730077EC17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDC9E72A29CD730077EC17 /* AppDelegate.swift */; };
+		70CDC9EC2A29CFB30077EC17 /* fire.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70CDC9EB2A29CFB30077EC17 /* fire.mp3 */; };
+		70D2F90B2A1E128B00099F17 /* MainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F90A2A1E128B00099F17 /* MainApp.swift */; };
 		70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F90E2A1E128C00099F17 /* Assets.xcassets */; };
 		70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -95,8 +97,10 @@
 		70BCDFF62A248117002AE1CC /* DynamicWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = DynamicWidget.intentdefinition; sourceTree = "<group>"; };
 		70BCDFF72A248118002AE1CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70BCDFF92A248118002AE1CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70CDC9E72A29CD730077EC17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		70CDC9EB2A29CFB30077EC17 /* fire.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fire.mp3; sourceTree = "<group>"; };
 		70D2F9072A1E128B00099F17 /* taskfolio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = taskfolio.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskfolioApp.swift; sourceTree = "<group>"; };
+		70D2F90A2A1E128B00099F17 /* MainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainApp.swift; sourceTree = "<group>"; };
 		70D2F90E2A1E128C00099F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		70D2F9112A1E128C00099F17 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		70D2F9182A1E128C00099F17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,7 +130,8 @@
 		703D55942A1F14E2003BB6D7 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				70D2F90A2A1E128B00099F17 /* taskfolioApp.swift */,
+				70D2F90A2A1E128B00099F17 /* MainApp.swift */,
+				70CDC9E72A29CD730077EC17 /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -262,6 +267,14 @@
 			path = DynamicWidget;
 			sourceTree = "<group>";
 		};
+		70CDC9EA2A29CFB30077EC17 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70CDC9EB2A29CFB30077EC17 /* fire.mp3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		70D2F8FE2A1E128B00099F17 = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +297,7 @@
 		70D2F9092A1E128B00099F17 /* taskfolio */ = {
 			isa = PBXGroup;
 			children = (
+				70CDC9EA2A29CFB30077EC17 /* Resources */,
 				703D55B32A1F43A3003BB6D7 /* taskfolio.entitlements */,
 				703D55942A1F14E2003BB6D7 /* App */,
 				703D55952A1F14E8003BB6D7 /* Feature */,
@@ -402,6 +416,7 @@
 			files = (
 				70D2F9122A1E128C00099F17 /* Preview Assets.xcassets in Resources */,
 				70D2F90F2A1E128C00099F17 /* Assets.xcassets in Resources */,
+				70CDC9EC2A29CFB30077EC17 /* fire.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,8 +457,9 @@
 				703D55A52A1F16BC003BB6D7 /* HomeStore.swift in Sources */,
 				703D55A72A1F3F82003BB6D7 /* HomeView.swift in Sources */,
 				703D55AF2A1F42B4003BB6D7 /* taskfolio.xcdatamodeld in Sources */,
-				70D2F90B2A1E128B00099F17 /* taskfolioApp.swift in Sources */,
+				70D2F90B2A1E128B00099F17 /* MainApp.swift in Sources */,
 				703D55B82A1F455C003BB6D7 /* SettingStore.swift in Sources */,
+				70CDC9E82A29CD730077EC17 /* AppDelegate.swift in Sources */,
 				703D559B2A1F15C7003BB6D7 /* RootView.swift in Sources */,
 				703D55BC2A1F57DA003BB6D7 /* TaskClient.swift in Sources */,
 			);
